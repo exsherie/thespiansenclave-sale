@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thespiansenclave · the gilded marquee</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #1d1a16;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #ece7e1;
+            line-height: 1.5;
+        }
+        .curtain-bg {
+            background: radial-gradient(circle at 30% 30%, #3f332a, #1a1512);
+            position: relative;
+        }
+        .curtain-bg::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image:  repeating-linear-gradient(45deg, rgba(200, 170, 140, 0.02) 0px, rgba(200, 170, 140, 0.02) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 5;
+        }
+        /* marquee ribbon */
+        .marquee-gold {
+            background: #c9a87c;
+            color: #171411;
+            display: inline-block;
+            padding: 0.4rem 2rem 0.4rem 1.8rem;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+        .domain-hero {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 12vw, 6.8rem);
+            font-weight: 800;
+            line-height: 1;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+            margin-bottom: 1rem;
+        }
+        .domain-hero .enclave {
+            color: #c9a87c;
+            font-weight: 700;
+            display: inline-block;
+            transform: scale(1.02);
+            border-bottom: 6px double #c9a87c;
+        }
+        .hero-sub {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #c7b5a2;
+            max-width: 650px;
+            margin: 1.5rem 0 2.5rem;
+            font-style: italic;
+            border-left: 4px solid #c9a87c;
+            padding-left: 2rem;
+        }
+        .price-sign {
+            background: #0e0c0a;
+            border: 2px solid #c9a87c;
+            padding: 0.6rem 2.2rem;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #f2e3d4;
+            display: inline-block;
+            border-radius: 100px;
+            margin: 1rem 0 2rem;
+            box-shadow: 0 20px 30px -10px black;
+        }
+        .price-sign small {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #c9a87c;
+        }
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2.8rem 0 4rem;
+        }
+        .btn-gold {
+            background: #c9a87c;
+            color: #1a1512;
+            font-weight: 700;
+            font-size: 1.4rem;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid #c9a87c;
+            box-shadow: 0 0 25px #c9a87c66;
+        }
+        .btn-gold:hover {
+            background: transparent;
+            color: #c9a87c;
+            box-shadow: 0 0 35px #c9a87c;
+        }
+        .btn-ghost {
+            background: transparent;
+            border: 2px solid #7f6e5c;
+            color: #e2d4c5;
+            font-weight: 500;
+            font-size: 1.3rem;
+            padding: 0.9rem 2.5rem;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .btn-ghost:hover {
+            border-color: #c9a87c;
+            background: rgba(201,168,124,0.1);
+        }
+        .spotlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin: 5rem 0;
+        }
+        .card-theatre {
+            background: #2f2822;
+            padding: 2.5rem 2rem;
+            border-radius: 30px;
+            border-bottom: 5px solid #c9a87c;
+            transition: all 0.2s;
+        }
+        .card-theatre:hover {
+            background: #3d332b;
+            transform: translateY(-8px);
+        }
+        .card-theatre i {
+            font-size: 2.8rem;
+            color: #c9a87c;
+            margin-bottom: 1.5rem;
+        }
+        .card-theatre h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .card-theatre p {
+            color: #b8a99a;
+        }
+        .enclave-definition {
+            background: #231f1b;
+            border-radius: 80px 20px 80px 20px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid #51473d;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .def-text {
+            font-size: 1.5rem;
+            max-width: 700px;
+        }
+        .def-text span {
+            color: #c9a87c;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+        }
+        .mini-spec {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2rem;
+            background: #2b241f;
+            padding: 2.5rem;
+            border-radius: 30px;
+            margin: 3rem 0;
+            border: 1px solid #635243;
+        }
+        .mini-spec div {
+            border-bottom: 1px dashed #6e5f4e;
+            padding: 0.6rem 0;
+        }
+        .mini-spec strong {
+            color: #c9a87c;
+            display: inline-block;
+            width: 120px;
+        }
+        .quote-block {
+            font-size: 1.8rem;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            padding: 3rem 1rem;
+            border-top: 1px solid #5f503f;
+            border-bottom: 1px solid #5f503f;
+        }
+        .contact-last {
+            text-align: center;
+            margin: 5rem 0 2rem;
+            font-size: 1.5rem;
+        }
+        .contact-last a {
+            color: #c9a87c;
+            text-decoration: none;
+            border-bottom: 3px dotted;
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body class="curtain-bg">
+    <div class="container">
+        <div class="marquee-gold">✦ THE ACTOR’S HAVEN ✦ EST. 2026</div>
+
+        <div class="domain-hero">thespians<span class="enclave">enclave</span>.com</div>
+        <div class="hero-sub">a private digital stage for the dramatic arts</div>
+
+        <div class="price-sign">$99 <small>or best offer</small></div>
+
+        <div class="cta-row">
+            <a href="#" class="btn-gold"><i class="fas fa-ticket-alt"></i> claim on namecheap</a>
+            <a href="mailto:exsherie@gmail.com?subject=Inquiry%20for%20thespiansenclave.com" class="btn-ghost"><i class="fas fa-mask"></i> ask the curator</a>
+        </div>
+
+        <!-- spotlight cards  -->
+        <div class="spotlight-cards">
+            <div class="card-theatre">
+                <i class="fas fa-drama-masks"></i>
+                <h3>for the guild</h3>
+                <p>Whether you’re a repertory company, a drama school, or a streaming theatre, this domain signals membership in an exclusive club.</p>
+            </div>
+            <div class="card-theatre">
+                <i class="fas fa-microphone-alt"></i>
+                <h3>podcast & stage</h3>
+                <p>Perfect for a narrative podcast about acting, a backstage blog, or an online community where thespians share monologues.</p>
+            </div>
+            <div class="card-theatre">
+                <i class="fas fa-landmark"></i>
+                <h3>enclave effect</h3>
+                <p>“Enclave” implies intimacy, privacy, refuge. Combine with “thespians” and you get an irresistible brand for members‑only content.</p>
+            </div>
+        </div>
+
+        <!-- definition block -->
+        <div class="enclave-definition">
+            <div class="def-text">
+                <span>en·clave</span> /ˈänˌklāv/ <br>
+                a distinct territory or group surrounded by a different culture. <br>
+                <strong style="color:#e2d4c5;">thespiansenclave.com = your company’s digital fortress.</strong>
+            </div>
+            <i class="fas fa-theater-masks" style="font-size: 5rem; color: #c9a87c; opacity: 0.6;"></i>
+        </div>
+
+        <!-- domain specs compact -->
+        <div class="mini-spec">
+            <div><strong>domain</strong> thespiansenclave.com</div>
+            <div><strong>extension</strong> .com (king)</div>
+            <div><strong>created</strong> 2025 · fresh</div>
+            <div><strong>price</strong> $99 USD · inclusive</div>
+            <div><strong>registrar</strong> Namecheap</div>
+            <div><strong>niche</strong> theatre / arts / education</div>
+        </div>
+
+        <!-- testimonial / quote -->
+        <div class="quote-block">
+            “All the world’s a stage, and this domain is the backstage pass.”
+            <div style="font-size: 1.2rem; margin-top: 1rem; color: #c9a87c;">— ideal for drama societies & academies</div>
+        </div>
+
+        <!-- why $99? -->
+        <div style="background: #1e1713; border-radius: 30px; padding: 2rem; margin: 2rem 0;">
+            <p style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; font-size: 1.3rem;">
+                <i class="fas fa-tags" style="color:#c9a87c; font-size: 3rem;"></i> 
+                <span>Priced for a fast sale to the right creative force. Comparable brandable .com domains sell between $75 and $250. secure it before a producer does.</span>
+            </p>
+        </div>
+
+        <!-- final contact -->
+        <div class="contact-last">
+            <i class="fas fa-feather" style="color:#c9a87c;"></i> write to the developer:  
+            <a href="mailto:exsherie@gmail.com?subject=Inquiry%20thespiansenclave">exsherie@gmail.com</a>
+        </div>
+
+        <footer>
+            © 2026 · domain owned by exsherie · listed exclusively on namecheap marketplace
+        </footer>
+    </div>
+</body>
+</html>
